@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive Map - CryptoScape</title>
+  <style>
+    /* Basic styles for the interactive map page */
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+  <!-- Import map: maps bare module specifiers to full URLs -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.skypack.dev/three@0.152.2",
+      "three/examples/jsm/controls/OrbitControls.js": "https://cdn.skypack.dev/three@0.152.2/examples/jsm/controls/OrbitControls.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- The interactive map will be rendered by app.js -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CryptoScape</title>
+  <!-- Import Orbitron font for a crypto/futuristic look -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Import Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    integrity="sha512-pbXyb5n4TrECN81or+2r/hv+6trAd+bnTkVkKfHA0Fco/CV/VfzXmsL9e70i4OUMhFLa7OIE5O3bUicvMxA/5A==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  </script>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #1a1a1a;
+      padding: 15px 0;
+      z-index: 1000;
+      text-align: center;
+    }
+    .navbar ul {
+      list-style: none;
+      display: inline-flex;
+    }
+    .navbar ul li {
+      margin: 0 20px;
+    }
+    .navbar ul li a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+    .navbar ul li a:hover,
+    .navbar ul li a.active {
+      color: #00ff99;
+    }
+    /* Full-page sections */
+    main {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+    .section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      scroll-snap-align: start;
+      padding: 20px;
+    }
+    .container {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+      position: relative;
+    }
+    .container h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: #00ff99;
+    }
+    .container p {
+      font-size: 1.5rem;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+    /* Timeline Styling - Increased Height */
+    .timeline-horizontal {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding: 10px 0;
+      position: relative;
+      height: 150px;
+    }
+    .timeline-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    /* The animated neon connecting line */
+    .timeline-inner::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00ff99;
+      z-index: 1;
+      transform: translateY(-50%);
+      animation: drawLine 4s forwards ease-in-out;
+    }
+    @keyframes drawLine {
+      0% { width: 0%; }
+      14% { width: 14%; }
+      28% { width: 28%; }
+      42% { width: 42%; }
+      56% { width: 56%; }
+      70% { width: 70%; }
+      84% { width: 84%; }
+      100% { width: 100%; }
+    }
+    .timeline-item {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      text-align: center;
+    }
+    .timeline-icon {
+      width: 10px;
+      height: 10px;
+      background: #00ff99;
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+    /* Reposition timeline text further down */
+    .timeline-text {
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .timeline-text h3 {
+      font-size: 0.9rem;
+      margin: 2px 0;
+      color: #00ff99;
+    }
+    .timeline-text p {
+      font-size: 0.75rem;
+      line-height: 1.2;
+      color: #e0e0e0;
+    }
+    /* Extra text below timeline about exploring time */
+    .explore-time-text {
+      margin-top: 120px;
+      font-size: 1.2rem;
+      color: #00ff99;
+    }
+    /* Button Styling for Explore */
+    .btn {
+      background: #00ff99;
+      color: #0a0a0a;
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      margin-top: 20px;
+    }
+    .btn:hover {
+      background: #00cc88;
+    }
+    /* Social Links Styling */
+    .social-links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .social-links a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .social-links a:hover {
+      color: #00ff99;
+    }
+    /* Footer Styling */
+    footer {
+      text-align: center;
+      padding: 15px 15px 35px;
+      background: #1a1a1a;
+      color: #e0e0e0;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body onload="scrollToTop()">
+  <nav class="navbar">
+    <ul>
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#the-atlas">The Atlas</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+  <main>
+    <!-- Home Section with Timeline -->
+    <section id="home" class="section">
+      <div class="container">
+        <h1>CryptoScape</h1>
+        <p>Discover the intersection of crypto and history.</p>
+        <h2>Crypto Timeline</h2>
+        <div class="timeline-horizontal">
+          <div class="timeline-inner">
+            <div class="timeline-item">
+              <div class="timeline-icon"></div>
+              <div class="timeline-text">
+                <h3>2008</h3>
+                <p>Bitcoin whitepaper</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-icon"></div>
+              <div class="timeline-text">
+                <h3>2009</h3>
+                <p>Bitcoin launched</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-icon"></div>
+              <div class="timeline-text">
+                <h3>2015</h3>
+                <p>Ethereum</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-icon"></div>
+              <div class="timeline-text">
+                <h3>2017</h3>
+                <p>ICO boom</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-icon"></div>
+              <div class="timeline-text">
+                <h3>2020</h3>
+                <p>DeFi revolution</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-icon"></div>
+              <div class="timeline-text">
+                <h3>2021</h3>
+                <p>NFT explosion</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-icon"></div>
+              <div class="timeline-text">
+                <h3>2025</h3>
+                <p>Mass adoption</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-icon"></div>
+              <div class="timeline-text">
+                <h3>2030</h3>
+                <p>Global integration</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- New text block below timeline -->
+        <p class="explore-time-text">
+          Embark on a journey through time and explore the milestones that shaped the future of cryptocurrency.
+        </p>
+      </div>
+    </section>
+    <!-- The Atlas Section -->
+    <section id="the-atlas" class="section">
+      <div class="container">
+        <h1>The Atlas</h1>
+        <p>Explore crypto landmarks around the world. Dive into interactive maps and uncover stories behind the rise of digital currencies.</p>
+        <!-- Updated Explore button with id and href="#" -->
+        <a href="#" id="exploreBtn" class="btn">Explore</a>
+      </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <h1>About CryptoScape</h1>
+        <p>
+          At CryptoScape, we are passionate about exploring the rich history and evolving landscape of cryptocurrency. Our mission is to connect you with the hidden stories behind digital currencies and the historic landmarks that symbolize this technological revolution.
+        </p>
+        <p>
+          Our platform provides in-depth analysis, interactive maps, and a vibrant community where enthusiasts can share insights and discover new opportunities. Whether you are a seasoned investor, a curious explorer, or someone looking to understand the impact of crypto on global culture, CryptoScape is your gateway.
+        </p>
+        <p>
+          We believe that every landmark tells a story and every journey begins with a single step. Join us as we chronicle the evolution of digital currencies, uncover hidden gems, and foster a community of innovation and discovery.
+        </p>
+        <div class="social-links">
+          <a href="https://instagram.com/youraccount" target="_blank">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+          <a href="https://x.com/youraccount" target="_blank">
+            <i class="fab fa-x-twitter"></i> X
+          </a>
+          <a href="https://t.me/youraccount" target="_blank">
+            <i class="fab fa-telegram-plane"></i> Telegram
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 CryptoScape. All rights reserved.
+  </footer>
+  <script>
+    function scrollToTop() {
+      window.scrollTo(0, 0);
+    }
+  </script>
+  <!-- Include the Map.js script -->
+  <script src="Map.js"></script>
+</body>
+</html>
